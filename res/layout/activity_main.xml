@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+  
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical" >
+
+            <RelativeLayout
+                android:id="@+id/mi_embarazo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/search_bg_shadow" >
+
+                <TextView
+                    android:id="@+id/NombrePadreMadre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/SemanasEmbarazo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/NombrePadreMadre"
+                    android:textColor="#ba079f"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/InformacionRelevante"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@+id/SemanasEmbarazo"
+                    android:textColor="#ba079f"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
+
+                <TextView
+                    android:id="@+id/NombreBebe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/SexoBebe"
+                    android:layout_below="@+id/SexoBebe"
+                    android:text="hola"
+                    android:textColor="#ba079f"
+                    android:textSize="12sp"
+                    android:textStyle="normal" />
+
+                <ImageView
+                    android:id="@+id/SexoBebe"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/InformacionRelevante"
+                    android:layout_alignRight="@+id/NombrePadreMadre"
+                    android:layout_marginRight="12dp"
+                    android:contentDescription="todo"
+                    android:src="@drawable/sexo_09" />
+
+                <ProgressBar
+                    android:id="@+id/progressBar1"
+                    style="?android:attr/progressBarStyleHorizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/NombreBebe"
+                    android:layout_marginTop="5dp"
+                    android:progress="50" />
+            </RelativeLayout>
+
+            <ListView
+                android:id="@+id/myList"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:background="@drawable/search_bg_shadow"
+                android:divider="@android:color/transparent"
+                android:dividerHeight="10dp"
+                android:paddingLeft="10dip"
+                android:paddingRight="10dip"
+                android:paddingTop="1dip" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listViewMenu"
+            android:layout_width="240dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:background="#111"
+            android:choiceMode="singleChoice"
+            android:divider="@android:color/transparent"/>
+    
+
+</android.support.v4.widget.DrawerLayout>
