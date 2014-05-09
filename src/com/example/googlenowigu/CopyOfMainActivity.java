@@ -14,7 +14,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
-public class MainActivity extends Activity {
+public class CopyOfMainActivity extends Activity {
 
 	private List<RowItem> rowItems;
 	private ProgressBar pb;

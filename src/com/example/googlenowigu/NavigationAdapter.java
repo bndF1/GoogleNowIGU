@@ -48,11 +48,11 @@ public class NavigationAdapter extends BaseAdapter {
            Item_objct itm=arrayitms.get(position);
            convertView = inflator.inflate(R.layout.itm, null);
            //Titulo
-           view.titulo_itm = (TextView) convertView.findViewById(R.id.title_item);
+         //  view.titulo_itm = (TextView) convertView.findViewById(R.id.title_item);
            //Seteo en el campo titulo el nombre correspondiente obtenido del objeto
            view.titulo_itm.setText(itm.getTitulo());           
            //Icono
-           view.icono = (ImageView) convertView.findViewById(R.id.icon);
+        //   view.icono = (ImageView) convertView.findViewById(R.id.icon);
            //Seteo el icono
            view.icono.setImageResource(itm.getIcono());           
            convertView.setTag(view);  
