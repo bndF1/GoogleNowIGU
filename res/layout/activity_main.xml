@@ -5,7 +5,7 @@
     android:layout_height="match_parent" >
 
   
-        <FrameLayout
+        <LinearLayout
               android:id="@+id/content_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -88,13 +88,13 @@
                 android:paddingLeft="10dip"
                 android:paddingRight="10dip"
                 android:paddingTop="1dip" />
-        </FrameLayout>
+        </LinearLayout>
 
       <ListView
         android:id="@+id/listViewMenu"
         android:layout_width="240dp"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
+        android:layout_gravity="left"
         android:choiceMode="singleChoice"
         android:divider="@android:color/transparent"
         android:dividerHeight="0dp"

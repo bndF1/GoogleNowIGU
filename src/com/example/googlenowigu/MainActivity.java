@@ -4,10 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.app.Activity;
+import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -19,12 +23,14 @@ public class MainActivity extends Activity {
 	private List<RowItem> rowItems;
 	private ProgressBar pb;
 	private DrawerLayout NavDrawerLayout;
-    private ListView NavList;
-    private String[] titulos;
-    private ArrayList<Item_objct> NavItms;
-    private TypedArray NavIcons;	
-    NavigationAdapter NavAdapter;  
-	
+	private ListView NavList;
+	private String[] titulos;
+	private ArrayList<Item_objct> NavItms;
+	private TypedArray NavIcons;
+	NavigationAdapter NavAdapter;
+	private ActionBarDrawerToggle mDrawerToggle;
+	private CharSequence mDrawerTitle;
+	private CharSequence mTitle;
 	private static Integer[] images = { R.drawable.red,
 			R.drawable.aliementos_desintoxicar_cuerpo,
 			R.drawable.alimentos_quemagrasa, R.drawable.snacks,
@@ -35,48 +41,63 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		
+
 		pb = (ProgressBar) findViewById(R.id.progressBar1);
 		// Get the Drawable custom_progressbar
 		Drawable customDrawable = getResources().getDrawable(
 				R.drawable.custom_progress_bar);
 		// set the drawable as progress drawable
 		pb.setProgressDrawable(customDrawable);
-		
-		//Drawer Layout
+
+		// Drawer Layout
 		NavDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-		//Lista
-        NavList = (ListView) findViewById(R.id.listViewMenu);
-		
-        View header = getLayoutInflater().inflate(R.layout.header, null);
-        //Establecemos header
-        NavList.addHeaderView(header);
-		//Tomamos listado  de imgs desde drawable
-        NavIcons = getResources().obtainTypedArray(R.array.navigation_iconos);			
-		//Tomamos listado  de titulos desde el string-array de los recursos @string/nav_options
-        titulos = getResources().getStringArray(R.array.nav_options);
-        //Listado de titulos de barra de navegacion
-        NavItms = new ArrayList<Item_objct>();
-        //Agregamos objetos Item_objct al array
-        //Perfil	      
-        NavItms.add(new Item_objct(titulos[0], NavIcons.getResourceId(0, -1)));
-        //Favoritos
-        NavItms.add(new Item_objct(titulos[1], NavIcons.getResourceId(1, -1)));
-        //Eventos
-        NavItms.add(new Item_objct(titulos[2], NavIcons.getResourceId(2, -1)));
-        //Lugares
-        NavItms.add(new Item_objct(titulos[3], NavIcons.getResourceId(3, -1)));
-        //Etiquetas
-        NavItms.add(new Item_objct(titulos[4], NavIcons.getResourceId(4, -1)));
-        //Configuracion
-        NavItms.add(new Item_objct(titulos[5], NavIcons.getResourceId(5, -1)));
-        //Share
-        NavItms.add(new Item_objct(titulos[6], NavIcons.getResourceId(6, -1)));	      
-        //Declaramos y seteamos nuestrp adaptador al cual le pasamos el array con los titulos	       
-        NavAdapter= new NavigationAdapter(this,NavItms);
-        NavList.setAdapter(NavAdapter);	
-        //Siempre vamos a mostrar el mismo titulo
-		
+		// Lista
+		NavList = (ListView) findViewById(R.id.listViewMenu);
+
+		View header = getLayoutInflater().inflate(R.layout.header, null);
+		// Establecemos header
+		NavList.addHeaderView(header);
+		// Tomamos listado de imgs desde drawable
+		NavIcons = getResources().obtainTypedArray(R.array.navigation_iconos);
+		// Tomamos listado de titulos desde el string-array de los recursos
+		// @string/nav_options
+		titulos = getResources().getStringArray(R.array.nav_options);
+		// Listado de titulos de barra de navegacion
+		NavItms = new ArrayList<Item_objct>();
+		// Agregamos objetos Item_objct al array
+		// Perfil
+		NavItms.add(new Item_objct(titulos[0], NavIcons.getResourceId(0, -1)));
+		// Favoritos
+		NavItms.add(new Item_objct(titulos[1], NavIcons.getResourceId(1, -1)));
+		// Eventos
+		NavItms.add(new Item_objct(titulos[2], NavIcons.getResourceId(2, -1)));
+		// Lugares
+		NavItms.add(new Item_objct(titulos[3], NavIcons.getResourceId(3, -1)));
+		// Etiquetas
+		NavItms.add(new Item_objct(titulos[4], NavIcons.getResourceId(4, -1)));
+		// Configuracion
+		NavItms.add(new Item_objct(titulos[5], NavIcons.getResourceId(5, -1)));
+		// Share
+		NavItms.add(new Item_objct(titulos[6], NavIcons.getResourceId(6, -1)));
+		// Declaramos y seteamos nuestrp adaptador al cual le pasamos el array
+		// con los titulos
+		NavAdapter = new NavigationAdapter(this, NavItms);
+		NavList.setAdapter(NavAdapter);
+		// Siempre vamos a mostrar el mismo titulo
+		mTitle = mDrawerTitle = getTitle();
+		mDrawerToggle = new ActionBarDrawerToggle(this, /* host Activity */
+		NavDrawerLayout, /* DrawerLayout object */
+		R.drawable.ic_drawer, /* Icono de navegacion */
+		R.string.app_name, /* "open drawer" description */
+		R.string.hello_world /* "close drawer" description */
+		){};
+
+		// Establecemos que mDrawerToggle declarado anteriormente sea el
+		// DrawerListener
+		NavDrawerLayout.setDrawerListener(mDrawerToggle);
+		// Establecemos que el ActionBar muestre el Boton Home
+		getActionBar().setDisplayHomeAsUpEnabled(true);
+
 		// Intialize and set the Action Bar to Holo Blue
 		// ActionBar actionBar = getActionBar();
 		// actionBar.setBackgroundDrawable(new
@@ -117,5 +138,28 @@ public class MainActivity extends Activity {
 			}
 		});
 	}
+	
+	@Override
+    protected void onPostCreate(Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        // Sync the toggle state after onRestoreInstanceState has occurred.
+        mDrawerToggle.syncState();
+    }
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        mDrawerToggle.onConfigurationChanged(newConfig);
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Pass the event to ActionBarDrawerToggle, if it returns
+        // true, then it has handled the app icon touch event
+        if (mDrawerToggle.onOptionsItemSelected(item)) {
+            Log.e("mDrawerToggle pushed", "x");
+          return true;
+        }
+        // Handle your other action bar items...
+        return super.onOptionsItemSelected(item);
+    }
 
 }
